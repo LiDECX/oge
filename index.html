@@ -8,199 +8,996 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
   <style>
+    /* ===== THEMES ===== */
     :root {
-      --bg: #0a0a0a; --surface: #111111; --border: #1e1e1e;
-      --accent: #e8e8e8; --muted: #555; --text: #999; --bright: #fff;
-      --green: #4ade80; --sun: #FFD166; --timer-bg: #1a1a1a;
+      --bg: #0d0d0d;
+      --surface: #141414;
+      --surface-2: #1a1a1a;
+      --border: #242424;
+      --border-hover: #303030;
+      --accent: #d4d4d4;
+      --muted: #555555;
+      --text: #888888;
+      --bright: #ffffff;
+      --accent-color: #aaaaaa;
+      --accent-soft: rgba(200,200,200,0.08);
+      --accent-glow: rgba(200,200,200,0.12);
+      --pinned: #f0c040;
+      --pinned-soft: rgba(240,192,64,0.07);
+      --timer-bg: #0f0f0f;
+      --gradient: linear-gradient(135deg, #ffffff 0%, #888888 100%);
+      --accent-gradient: linear-gradient(135deg, #aaaaaa 0%, #666666 100%);
+      --radius: 12px;
     }
+
+    /* Dark (default) — уже задан выше */
+
+    [data-theme="amoled"] {
+      --bg: #000000;
+      --surface: #0a0a0a;
+      --surface-2: #111111;
+      --border: #1c1c1c;
+      --border-hover: #262626;
+      --accent: #e0e0e0;
+      --muted: #444444;
+      --text: #777777;
+      --bright: #ffffff;
+      --accent-color: #aaaaaa;
+      --accent-soft: rgba(200,200,200,0.07);
+      --accent-glow: rgba(200,200,200,0.10);
+      --pinned: #f0c040;
+      --pinned-soft: rgba(240,192,64,0.06);
+      --timer-bg: #050505;
+      --gradient: linear-gradient(135deg, #ffffff 0%, #666666 100%);
+      --accent-gradient: linear-gradient(135deg, #aaaaaa 0%, #444444 100%);
+    }
+
+    [data-theme="blue"] {
+      --bg: #0b0f1a;
+      --surface: #111827;
+      --surface-2: #1a2236;
+      --border: #1f2d45;
+      --border-hover: #2a3d5e;
+      --accent: #e2e8f0;
+      --muted: #4a6080;
+      --text: #7090b0;
+      --bright: #f0f8ff;
+      --accent-color: #60a5fa;
+      --accent-soft: rgba(96,165,250,0.12);
+      --accent-glow: rgba(96,165,250,0.25);
+      --pinned: #fbbf24;
+      --pinned-soft: rgba(251,191,36,0.08);
+      --timer-bg: #090d18;
+      --gradient: linear-gradient(135deg, #f0f8ff 0%, #93c5fd 100%);
+      --accent-gradient: linear-gradient(135deg, #60a5fa 0%, #818cf8 100%);
+    }
+
+    [data-theme="green"] {
+      --bg: #0a0f0a;
+      --surface: #111811;
+      --surface-2: #182018;
+      --border: #1e2e1e;
+      --border-hover: #283c28;
+      --accent: #d4edda;
+      --muted: #3d6b3d;
+      --text: #5a9a5a;
+      --bright: #f0fff0;
+      --accent-color: #4ade80;
+      --accent-soft: rgba(74,222,128,0.10);
+      --accent-glow: rgba(74,222,128,0.20);
+      --pinned: #facc15;
+      --pinned-soft: rgba(250,204,21,0.08);
+      --timer-bg: #080d08;
+      --gradient: linear-gradient(135deg, #f0fff0 0%, #86efac 100%);
+      --accent-gradient: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+    }
+
+    [data-theme="purple"] {
+      --bg: #0d0b14;
+      --surface: #13101e;
+      --surface-2: #1c1828;
+      --border: #26213a;
+      --border-hover: #342d50;
+      --accent: #e9d5ff;
+      --muted: #5b4d7a;
+      --text: #8b6fbf;
+      --bright: #faf5ff;
+      --accent-color: #a78bfa;
+      --accent-soft: rgba(167,139,250,0.12);
+      --accent-glow: rgba(167,139,250,0.25);
+      --pinned: #f472b6;
+      --pinned-soft: rgba(244,114,182,0.08);
+      --timer-bg: #0a0810;
+      --gradient: linear-gradient(135deg, #faf5ff 0%, #c4b5fd 100%);
+      --accent-gradient: linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%);
+    }
+
     [data-theme="light"] {
-      --bg: #ffffff; --surface: #f5f5f5; --border: #e5e5e5;
-      --accent: #1a1a1a; --muted: #888; --text: #444; --bright: #000;
-      --green: #16a34a; --sun: #f59e0b; --timer-bg: #e2e8f0;
+      --bg: #f5f5f5;
+      --surface: #ffffff;
+      --surface-2: #f0f0f0;
+      --border: #e0e0e0;
+      --border-hover: #cccccc;
+      --accent: #333333;
+      --muted: #999999;
+      --text: #666666;
+      --bright: #111111;
+      --accent-color: #444444;
+      --accent-soft: rgba(0,0,0,0.06);
+      --accent-glow: rgba(0,0,0,0.10);
+      --pinned: #d97706;
+      --pinned-soft: rgba(217,119,6,0.08);
+      --timer-bg: #ebebeb;
+      --gradient: linear-gradient(135deg, #111111 0%, #555555 100%);
+      --accent-gradient: linear-gradient(135deg, #555555 0%, #222222 100%);
     }
+
+    [data-theme="sepia"] {
+      --bg: #f4ede3;
+      --surface: #fffaf4;
+      --surface-2: #f0e8d8;
+      --border: #ddd0bb;
+      --border-hover: #c9b99e;
+      --accent: #5c3d1e;
+      --muted: #a88f72;
+      --text: #7a6248;
+      --bright: #2c1a08;
+      --accent-color: #8b5e3c;
+      --accent-soft: rgba(139,94,60,0.10);
+      --accent-glow: rgba(139,94,60,0.18);
+      --pinned: #b45309;
+      --pinned-soft: rgba(180,83,9,0.08);
+      --timer-bg: #ede4d6;
+      --gradient: linear-gradient(135deg, #2c1a08 0%, #8b5e3c 100%);
+      --accent-gradient: linear-gradient(135deg, #8b5e3c 0%, #5c3d1e 100%);
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      background: var(--bg); color: var(--text);
-      font-family: 'Inter', sans-serif; line-height: 1.6;
-      -webkit-font-smoothing: antialiased; transition: background 0.2s ease;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      transition: background 0.3s, color 0.3s;
     }
-    .theme-toggle, .search-input, .badge, .hero-name, .student-name, 
-    .exam-date, .exam-place, .timer, .footer-inner, .student-num, .stat-label, .stat-count {
+
+    .mono, .badge, .search-input, .hero-name, .student-name, .exam-date, .exam-place,
+    .timer, .student-num, .stat-label, .stat-count, .countdown-time, .countdown-label,
+    .menu-item, .schedule-date, .schedule-name, .schedule-place {
       font-family: 'JetBrains Mono', monospace;
     }
-    .container { max-width: 680px; margin: 0 auto; padding: 0 24px; }
-    header { padding: 24px 0; display: flex; justify-content: flex-end; gap: 12px; }
-    .theme-toggle, .search-input {
-      border: 1px solid var(--border); color: var(--bright);
-      border-radius: 6px; font-size: 0.75rem; transition: all 0.15s;
+
+    /* HEADER */
+    .header {
+      position: sticky; top: 0; z-index: 9999;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      transition: background 0.3s, border-color 0.3s;
     }
-    .theme-toggle { background: none; cursor: pointer; padding: 6px 12px; }
-    .theme-toggle:hover { background: var(--surface); border-color: var(--muted); }
-    .search-container { margin-bottom: 24px; position: sticky; top: 12px; z-index: 100; }
-    .search-input { width: 100%; padding: 12px 16px; background: var(--bg); backdrop-filter: blur(10px); outline: none; }
-    .search-input:focus { border-color: var(--sun); }
-    #hero { padding: 20px 0 40px; }
-    .badge { display: inline-flex; align-items: center; gap: 8px; font-size: 0.7rem; color: var(--muted); border: 1px solid var(--border); padding: 6px 12px; border-radius: 6px; margin-bottom: 24px; }
-    .hero-name { font-size: clamp(1.5rem, 5vw, 2rem); font-weight: 600; color: var(--bright); line-height: 1.2; margin-bottom: 8px; }
-    .students-grid { display: flex; flex-direction: column; gap: 4px; }
-    .student-details { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-    .student-summary { padding: 14px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; }
+    .logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600; font-size: 1rem;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .menu-btn {
+      background: transparent; border: none; cursor: pointer;
+      width: 36px; height: 36px;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      gap: 5px; padding: 0;
+    }
+    .menu-btn span {
+      display: block; width: 22px; height: 2px;
+      background: var(--bright); border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .menu-btn.open span:nth-child(2) { opacity: 0; }
+    .menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* SIDE MENU */
+    .menu-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(4px);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s;
+      z-index: 300;
+    }
+    .menu-overlay.active { opacity: 1; pointer-events: all; }
+
+    .side-menu {
+      position: fixed; top: 0; right: 0; height: 100%;
+      width: 280px; max-width: 85vw;
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), background 0.3s, border-color 0.3s;
+      z-index: 301;
+      padding: 24px 0;
+      display: flex; flex-direction: column;
+      overflow-y: auto;
+    }
+    .side-menu.active { transform: translateX(0); }
+
+    .menu-section-title {
+      padding: 18px 24px 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 1.2px;
+    }
+    .menu-divider {
+      height: 1px; background: var(--border);
+      margin: 8px 0;
+    }
+
+    .menu-header {
+      padding: 0 24px 16px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 4px;
+    }
+    .menu-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .menu-item {
+      padding: 14px 24px;
+      cursor: pointer;
+      color: var(--text);
+      font-size: 0.85rem;
+      display: flex; align-items: center; gap: 14px;
+      transition: all 0.15s;
+      border-left: 2px solid transparent;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .menu-item:hover { background: var(--surface-2); color: var(--bright); }
+    .menu-item.active {
+      color: var(--bright);
+      background: var(--surface-2);
+      border-left-color: var(--accent-color);
+    }
+    .menu-icon { font-size: 1.1rem; }
+
+    /* THEMES PANEL */
+    .themes-panel {
+      padding: 8px 16px 16px;
+    }
+    .theme-card {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      margin-bottom: 6px;
+      transition: all 0.18s;
+      position: relative;
+    }
+    .theme-card:hover { border-color: var(--border-hover); }
+    .theme-card.selected {
+      border-color: var(--accent-color);
+      background: var(--accent-soft);
+    }
+    .theme-preview {
+      width: 36px; height: 36px; border-radius: 8px;
+      flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      overflow: hidden;
+      position: relative;
+    }
+    .theme-preview-half {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      display: flex;
+    }
+    .theme-preview-half div {
+      flex: 1; height: 100%;
+    }
+    .theme-info { flex: 1; }
+    .theme-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem; font-weight: 600;
+      color: var(--bright);
+    }
+    .theme-desc {
+      font-size: 0.68rem; color: var(--muted);
+      font-family: 'Inter', sans-serif;
+      margin-top: 1px;
+    }
+    .theme-check {
+      font-size: 0.9rem; color: var(--accent-color);
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    .theme-card.selected .theme-check { opacity: 1; }
+
+    .container { max-width: 720px; margin: 0 auto; padding: 24px; }
+
+    /* COUNTDOWN */
+    .countdown-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      position: relative; overflow: hidden;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .countdown-card::before {
+      content: ''; position: absolute; top: -40%; right: -15%;
+      width: 220px; height: 220px;
+      background: radial-gradient(circle, var(--accent-glow), transparent 70%);
+      filter: blur(50px);
+      pointer-events: none;
+    }
+    .countdown-label {
+      font-size: 0.65rem; color: var(--accent-color);
+      text-transform: uppercase; letter-spacing: 1.5px;
+      margin-bottom: 8px;
+      position: relative;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .countdown-exam {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.1rem; font-weight: 600;
+      color: var(--bright); margin-bottom: 14px;
+      position: relative;
+    }
+    .countdown-time {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      position: relative;
+    }
+    .time-block {
+      background: var(--timer-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      min-width: 64px; text-align: center;
+      flex: 1;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .time-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.4rem; font-weight: 600;
+      color: var(--bright);
+      display: block;
+    }
+    .time-lbl {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem; color: var(--muted);
+      text-transform: uppercase; margin-top: 2px;
+    }
+
+    /* SEARCH */
+    .search-container { margin-bottom: 20px; }
+    .search-input {
+      width: 100%; padding: 12px 16px;
+      background: var(--surface); outline: none;
+      border: 1px solid var(--border);
+      color: var(--bright); border-radius: 8px;
+      font-size: 0.78rem; transition: all 0.15s;
+    }
+    .search-input::placeholder { color: var(--muted); }
+    .search-input:focus {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    /* HERO */
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.7rem; color: var(--accent-color);
+      border: 1px solid var(--border);
+      background: var(--accent-soft);
+      padding: 6px 12px; border-radius: 6px;
+      margin-bottom: 20px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .hero-name {
+      font-size: clamp(1.4rem, 4.5vw, 1.9rem);
+      font-weight: 600;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1.2; margin-bottom: 24px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* STUDENTS */
+    .students-grid { display: flex; flex-direction: column; gap: 6px; }
+    .student-details {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px; overflow: hidden;
+      transition: border-color 0.15s, background 0.3s;
+    }
+    .student-details:hover { border-color: var(--border-hover); }
+    .student-details.pinned {
+      border-color: rgba(240,192,64,0.4);
+      background: linear-gradient(135deg, var(--surface), var(--pinned-soft));
+    }
+    .student-summary {
+      padding: 14px 16px; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      list-style: none; gap: 10px;
+    }
     .student-summary::-webkit-details-marker { display: none; }
-    .name-block { display: flex; align-items: center; gap: 12px; }
-    .student-num { font-size: 0.75rem; color: var(--muted); min-width: 20px; }
-    .student-name { color: var(--bright); font-size: 0.9rem; font-weight: 500; }
-    .expand-icon { font-size: 0.7rem; color: var(--muted); transition: transform 0.2s; }
+    .name-block { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
+    .student-num {
+      font-size: 0.72rem; color: var(--muted); min-width: 22px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .student-name {
+      color: var(--bright); font-size: 0.88rem; font-weight: 500;
+      overflow: hidden; text-overflow: ellipsis;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .summary-controls { display: flex; align-items: center; gap: 10px; }
+    .pin-btn {
+      background: transparent; border: none; cursor: pointer;
+      font-size: 1rem; padding: 4px;
+      color: var(--muted); transition: all 0.2s;
+      line-height: 1;
+    }
+    .pin-btn:hover { color: var(--pinned); transform: scale(1.15); }
+    .pin-btn.active { color: var(--pinned); }
+    .expand-icon {
+      font-size: 0.65rem; color: var(--muted);
+      transition: transform 0.2s;
+    }
     .student-details[open] .expand-icon { transform: rotate(180deg); }
-    .exam-list { padding: 0 20px 16px 20px; border-top: 1px solid rgba(255,255,255,0.03); }
-    .exam-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(128, 128, 128, 0.05); }
+
+    .exam-list { padding: 0 16px 14px; border-top: 1px solid var(--border); }
+    .exam-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0; border-bottom: 1px solid rgba(128,128,128,0.08);
+      gap: 12px;
+    }
     .exam-item:last-child { border-bottom: none; }
-    .exam-name { color: var(--accent); font-size: 0.8rem; font-weight: 500; }
-    .exam-date { font-size: 0.65rem; color: var(--sun); }
-    .exam-place { font-size: 0.65rem; color: var(--muted); margin-top: 2px; }
-    .timer { font-size: 0.7rem; color: var(--green); background: var(--timer-bg); padding: 3px 8px; border-radius: 4px; min-width: 130px; text-align: center; }
-    .timer.expired { color: var(--muted); }
-    .stats-container { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 18px; margin-bottom: 20px;}
+    .exam-name { color: var(--accent); font-size: 0.82rem; font-weight: 500; }
+    .exam-date {
+      font-size: 0.66rem; color: var(--accent-color); margin-top: 3px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .exam-place {
+      font-size: 0.62rem; color: var(--muted); margin-top: 2px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .timer {
+      font-size: 0.68rem; color: var(--accent-color);
+      background: var(--timer-bg);
+      border: 1px solid var(--border);
+      padding: 5px 10px; border-radius: 6px;
+      min-width: 130px; text-align: center;
+      white-space: nowrap;
+      font-family: 'JetBrains Mono', monospace;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .timer.expired { color: var(--muted); border-color: var(--border); }
+
+    /* STATS */
+    .stats-container {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 22px;
+      display: flex; flex-direction: column; gap: 18px;
+      transition: background 0.3s, border-color 0.3s;
+    }
     .stat-row { display: flex; flex-direction: column; gap: 8px; }
-    .stat-info { display: flex; justify-content: space-between; font-size: 0.75rem; }
-    .stat-bar-bg { height: 8px; background: var(--timer-bg); border-radius: 4px; width: 100%; display: flex; }
-    .stat-bar-fill { height: 100%; background: #FFD166 !important; border-radius: 4px; min-width: 5px; transition: width 1s ease; }
-    .stat-count { color: var(--bright); font-weight: 600; }
-    footer { border-top: 1px solid var(--border); padding: 24px 0; margin-top: 40px; }
-    .footer-inner { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--muted); }
+    .stat-info { display: flex; justify-content: space-between; font-size: 0.78rem; }
+    .stat-label { color: var(--text); font-family: 'JetBrains Mono', monospace; }
+    .stat-bar-bg { height: 8px; background: var(--timer-bg); border-radius: 4px; width: 100%; overflow: hidden; }
+    .stat-bar-fill {
+      height: 100%; background: var(--accent-gradient);
+      border-radius: 4px; min-width: 5px;
+      transition: width 1s ease;
+    }
+    .stat-count { color: var(--bright); font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+
+    /* SCHEDULE */
+    .schedule-grid { display: flex; flex-direction: column; gap: 12px; }
+    .schedule-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 16px 18px;
+      display: flex; flex-direction: column; gap: 8px;
+      transition: border-color 0.15s, background 0.3s;
+    }
+    .schedule-card:hover { border-color: var(--border-hover); }
+    .schedule-head {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 10px;
+    }
+    .schedule-name {
+      color: var(--bright); font-weight: 600; font-size: 0.88rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .schedule-date {
+      font-size: 0.7rem; color: var(--accent-color);
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-soft);
+      padding: 4px 8px; border-radius: 5px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .schedule-place { font-size: 0.7rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+    .schedule-count { font-size: 0.7rem; color: var(--accent); font-family: 'JetBrains Mono', monospace; }
+
+    /* THEMES VIEW */
+    .themes-view-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .theme-big-card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .theme-big-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+    .theme-big-card.selected { border-color: var(--accent-color); }
+    .theme-big-preview {
+      width: 100%; height: 56px; border-radius: 8px;
+      margin-bottom: 10px;
+      display: flex; gap: 5px; padding: 8px;
+      overflow: hidden;
+    }
+    .theme-big-preview-bar {
+      flex: 1; border-radius: 4px; height: 100%;
+    }
+    .theme-big-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem; font-weight: 600;
+      color: var(--bright); margin-bottom: 2px;
+    }
+    .theme-big-desc {
+      font-size: 0.7rem; color: var(--muted);
+    }
+    .theme-big-badge {
+      position: absolute; top: 10px; right: 10px;
+      background: var(--accent-color);
+      color: var(--bg);
+      font-size: 0.6rem; font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 3px 7px; border-radius: 4px;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    .theme-big-card.selected .theme-big-badge { opacity: 1; }
+
+    .view { display: none; }
+    .view.active { display: block; }
+
     @media (max-width: 500px) {
-      .exam-item { flex-direction: column; align-items: flex-start; gap: 6px; }
-      .timer { width: 100%; text-align: left; padding-left: 0; background: none; }
+      .container { padding: 16px; }
+      .exam-item { flex-direction: row; justify-content: space-between; align-items: center; gap: 12px; }
+      .timer { width: auto; min-width: 115px; font-size: 0.65rem; padding: 4px 8px; }
+      .time-block { min-width: 56px; padding: 8px 10px; }
+      .time-num { font-size: 1.2rem; }
+      .themes-view-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
-<body data-theme="dark">
-<div class="container">
-  <header><button class="theme-toggle" id="themeToggle">LIGHT</button></header>
-  <div class="search-container">
-    <input type="text" id="searchInput" class="search-input" placeholder="Поиск по фамилии...">
+<body>
+
+<header class="header">
+  <div class="logo">9«В» • ОГЭ 2026</div>
+  <button class="menu-btn" id="menuBtn" aria-label="Меню">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<div class="menu-overlay" id="menuOverlay"></div>
+<nav class="side-menu" id="sideMenu">
+  <div class="menu-header">
+    <div class="menu-title">Разделы</div>
   </div>
-  <section id="hero">
+
+  <div class="menu-section-title">Навигация</div>
+  <div class="menu-item active" data-view="students">
+    <span class="menu-icon">👥</span><span>Ученики</span>
+  </div>
+  <div class="menu-item" data-view="stats">
+    <span class="menu-icon">📊</span><span>Статистика</span>
+  </div>
+  <div class="menu-item" data-view="schedule">
+    <span class="menu-icon">📅</span><span>Расписание</span>
+  </div>
+
+  <div class="menu-divider"></div>
+  <div class="menu-section-title">Настройки</div>
+  <div class="menu-item" data-view="themes">
+    <span class="menu-icon">🎨</span><span>Темы</span>
+  </div>
+</nav>
+
+<div class="container">
+
+  <section class="view active" id="view-students">
+    <div class="countdown-card" id="countdownCard"></div>
+    <div class="search-container">
+      <input type="text" id="searchInput" class="search-input" placeholder="Поиск по фамилии...">
+    </div>
     <div class="badge">✦ ГИА-9 • 2026</div>
     <h1 class="hero-name">Расписание ОГЭ 2026 — 9«В»</h1>
     <div class="students-grid" id="studentsGrid"></div>
   </section>
-  <section id="stats">
+
+  <section class="view" id="view-stats">
     <div class="badge">📊 Статистика предметов</div>
+    <h1 class="hero-name">Кто что сдаёт</h1>
     <div class="stats-container" id="statsContainer"></div>
   </section>
-  <footer>
-    <div class="footer-inner">
-      <span>© <span id="year"></span> LiDECX</span>
-      <span>v3.0.0</span>
-    </div>
-  </footer>
+
+  <section class="view" id="view-schedule">
+    <div class="badge">📅 Календарь экзаменов</div>
+    <h1 class="hero-name">Расписание</h1>
+    <div class="schedule-grid" id="scheduleGrid"></div>
+  </section>
+
+  <section class="view" id="view-themes">
+    <div class="badge">🎨 Оформление</div>
+    <h1 class="hero-name">Темы</h1>
+    <div class="themes-view-grid" id="themesGrid"></div>
+  </section>
+
 </div>
+
 <script>
+  // ===== THEMES CONFIG =====
+  const THEMES = [
+    {
+      id: 'dark',
+      name: 'Dark',
+      desc: 'Тёмная нейтральная',
+      colors: ['#0d0d0d', '#141414', '#aaaaaa', '#242424'],
+      emoji: '🌑'
+    },
+    {
+      id: 'amoled',
+      name: 'AMOLED',
+      desc: 'Чёрный для OLED-экранов',
+      colors: ['#000000', '#0a0a0a', '#aaaaaa', '#1c1c1c'],
+      emoji: '⚫'
+    },
+    {
+      id: 'blue',
+      name: 'Ocean Blue',
+      desc: 'Тёмная с синим акцентом',
+      colors: ['#0b0f1a', '#111827', '#60a5fa', '#1f2d45'],
+      emoji: '🌊'
+    },
+    {
+      id: 'green',
+      name: 'Matrix',
+      desc: 'Тёмная с зелёным акцентом',
+      colors: ['#0a0f0a', '#111811', '#4ade80', '#1e2e1e'],
+      emoji: '🟢'
+    },
+    {
+      id: 'purple',
+      name: 'Violet',
+      desc: 'Тёмная с фиолетовым',
+      colors: ['#0d0b14', '#13101e', '#a78bfa', '#26213a'],
+      emoji: '🟣'
+    },
+    {
+      id: 'light',
+      name: 'Light',
+      desc: 'Светлая классическая',
+      colors: ['#f5f5f5', '#ffffff', '#444444', '#e0e0e0'],
+      emoji: '☀️'
+    },
+    {
+      id: 'sepia',
+      name: 'Sepia',
+      desc: 'Тёплая бежевая',
+      colors: ['#f4ede3', '#fffaf4', '#8b5e3c', '#ddd0bb'],
+      emoji: '📜'
+    }
+  ];
+
+  const THEME_KEY = 'ogeb9b_theme';
+  const PIN_KEY   = 'ogeb9b_pinned';
+
+  // ===== THEME APPLY =====
+  const applyTheme = (id) => {
+    document.documentElement.setAttribute('data-theme', id === 'dark' ? '' : id);
+    localStorage.setItem(THEME_KEY, id);
+    document.querySelectorAll('.theme-card').forEach(c => {
+      c.classList.toggle('selected', c.dataset.themeId === id);
+    });
+    document.querySelectorAll('.theme-big-card').forEach(c => {
+      c.classList.toggle('selected', c.dataset.themeId === id);
+    });
+  };
+
+  const getSavedTheme = () => {
+    try { return localStorage.getItem(THEME_KEY) || 'dark'; }
+    catch(e) { return 'dark'; }
+  };
+
+  // ===== EXAM DATA =====
   const P1 = "ГБОУ гимназия №446", P2 = "ГБОУ СОШ №258";
   const EX = {
-    M:   { f: "Математика", d: "2026-06-02", p: P1 },
-    R:   { f: "Русский язык", d: "2026-06-09", p: P1 },
-    G5:  { f: "География", d: "2026-06-05", p: P1 },
-    G16: { f: "География", d: "2026-06-16", p: P2 },
-    I16: { f: "Информатика", d: "2026-06-16", p: P2 },
-    B5:  { f: "Биология", d: "2026-06-05", p: P1 },
-    B16: { f: "Биология", d: "2026-06-16", p: P2 },
-    O5:  { f: "Обществознание", d: "2026-06-05", p: P1 },
-    O16: { f: "Обществознание", d: "2026-06-16", p: P2 },
-    E5:  { f: "Английский (письм.)", d: "2026-06-05", p: P1 },
-    E6:  { f: "Английский (устн.)", d: "2026-06-06", p: P1 },
-    C5:  { f: "Химия", d: "2026-06-05", p: P2 },
-    C16: { f: "Химия", d: "2026-06-16", p: P2 },
-    F5:  { f: "Физика", d: "2026-06-05", p: P2 }
+    M:   { f: "Математика",           d: "2026-06-02", p: P1 },
+    R:   { f: "Русский язык",         d: "2026-06-09", p: P1 },
+    G5:  { f: "География",            d: "2026-06-05", p: P1 },
+    G16: { f: "География",            d: "2026-06-16", p: P2 },
+    I16: { f: "Информатика",          d: "2026-06-16", p: P2 },
+    B5:  { f: "Биология",             d: "2026-06-05", p: P1 },
+    B16: { f: "Биология",             d: "2026-06-16", p: P2 },
+    O5:  { f: "Обществознание",       d: "2026-06-05", p: P1 },
+    O16: { f: "Обществознание",       d: "2026-06-16", p: P2 },
+    E5:  { f: "Английский (письм.)",  d: "2026-06-05", p: P1 },
+    E6:  { f: "Английский (устн.)",   d: "2026-06-06", p: P1 },
+    C5:  { f: "Химия",                d: "2026-06-05", p: P2 },
+    C16: { f: "Химия",                d: "2026-06-16", p: P2 },
+    F5:  { f: "Физика",               d: "2026-06-05", p: P2 }
   };
   const rawData = [
-    ["Балабин Михаил Васильевич", "M,G5,R,I16"],
-    ["Басалаева Диана Захаровна", "M,G5,R,O16"],
-    ["Берсудская Валерия Константиновна", "M,B5,R,I16"],
-    ["Благов Максим Антонович", "M,G5,R,I16"],
-    ["Васильев Михаил Сергеевич", "M,E5,E6,R,I16"],
-    ["Зыкова Милана Дмитриевна", "M,E5,E6,R,O16"],
-    ["Клочков Роман Борисович", "M,E5,E6,R,I16"],
-    ["Козлова Александра Евгеньевна", "M,E5,E6,R,G16"],
-    ["Козлова Кира Евгеньевна", "M,E5,E6,R,G16"],
-    ["Копылова Мария Александровна", "M,G5,R,B16"],
-    ["Люйк Даниил Александрович", "M,E5,E6,R,C16"],
-    ["Мещанинов Никита Алексеевич", "M,C5,R,B16"],
-    ["Михеева Татьяна Викторовна", "M,B5,R,I16"],
-    ["Назаров Владимир Николаевич", "M,O5,R,I16"],
-    ["Песков Андрей Дмитриевич", "M,C5,R,B16"],
-    ["Смирнов Александр Максимович", "M,E5,E6,R,B16"],
-    ["Соловьев Егор Алексеевич", "M,G5,R,B16"],
-    ["Теплухова Ксения Игоревна", "M,O5,R,I16"],
-    ["Федорова Софья Антоновна", "M,E5,E6,R,O16"],
-    ["Филиппова Алиса Михайловна", "M,C5,R,B16"],
-    ["Фомичева Руслана Николаевна", "M,E5,E6,R,G16"],
-    ["Шалаевская Ангелина Михайловна", "M,G5,R,O16"],
-    ["Шустов Иван Алексеевич", "M,C5,R,I16"],
-    ["Щавелев Андрей Егорович", "M,F5,R,I16"],
-    ["Щавелев Илья Егорович", "M,F5,R,I16"]
+    ["Балабин Михаил Васильевич",        "M,G5,R,I16"],
+    ["Басалаева Диана Захаровна",         "M,G5,R,O16"],
+    ["Берсудская Валерия Константиновна","M,B5,R,I16"],
+    ["Благов Максим Антонович",           "M,G5,R,I16"],
+    ["Васильев Михаил Сергеевич",         "M,E5,E6,R,I16"],
+    ["Зыкова Милана Дмитриевна",          "M,E5,E6,R,O16"],
+    ["Клочков Роман Борисович",           "M,E5,E6,R,I16"],
+    ["Козлова Александра Евгеньевна",     "M,E5,E6,R,G16"],
+    ["Козлова Кира Евгеньевна",           "M,E5,E6,R,G16"],
+    ["Копылова Мария Александровна",      "M,G5,R,B16"],
+    ["Люйк Даниил Александрович",         "M,E5,E6,R,C16"],
+    ["Мещанинов Никита Алексеевич",       "M,C5,R,B16"],
+    ["Михеева Татьяна Викторовна",        "M,B5,R,I16"],
+    ["Назаров Владимир Николаевич",       "M,O5,R,I16"],
+    ["Песков Андрей Дмитриевич",          "M,C5,R,B16"],
+    ["Смирнов Александр Максимович",      "M,E5,E6,R,B16"],
+    ["Соловьев Егор Алексеевич",          "M,G5,R,B16"],
+    ["Теплухова Ксения Игоревна",         "M,O5,R,I16"],
+    ["Федорова Софья Антоновна",          "M,E5,E6,R,O16"],
+    ["Филиппова Алиса Михайловна",        "M,C5,R,B16"],
+    ["Фомичева Руслана Николаевна",       "M,E5,E6,R,G16"],
+    ["Шалаевская Ангелина Михайловна",    "M,G5,R,O16"],
+    ["Шустов Иван Алексеевич",            "M,C5,R,I16"],
+    ["Щавелев Андрей Егорович",           "M,F5,R,I16"],
+    ["Щавелев Илья Егорович",             "M,F5,R,I16"]
   ];
-  const data = rawData.map(([fullName, keys], index) => ({ id: index + 1, fullName, exams: keys.split(',').map(k => EX[k]) }));
-  const grid = document.getElementById('studentsGrid');
-  const search = document.getElementById('searchInput');
-  const getTimer = d => {
-    let diff = new Date(d).setHours(10,0,0,0) - new Date();
-    if (diff <= 0) return { exp: 'expired', txt: "ЗАВЕРШЕНО" };
-    let f = n => Math.floor(n);
-    let s = f((diff % 60000) / 1000);
-    return { exp: '', txt: `${f(diff/86400000)}д ${f((diff%86400000)/3600000)}ч ${f((diff%3600000)/60000)}м ${s}с` };
+  const data = rawData.map(([fullName, keys], index) => ({
+    id: index + 1, fullName,
+    exams: keys.split(',').map(k => EX[k])
+  }));
+
+  // ===== HELPERS =====
+  const getPinned = () => { try { return JSON.parse(localStorage.getItem(PIN_KEY)) || []; } catch(e) { return []; } };
+  const setPinned = arr => localStorage.setItem(PIN_KEY, JSON.stringify(arr));
+  const togglePin = name => {
+    const p = getPinned(); const i = p.indexOf(name);
+    if (i >= 0) p.splice(i,1); else p.push(name);
+    setPinned(p);
   };
+  const getDiff = d => new Date(d).setHours(10,0,0,0) - new Date();
+  const getTimer = d => {
+    let diff = getDiff(d);
+    if (diff <= 0) return { exp: 'expired', txt: "ЗАВЕРШЕНО" };
+    const f = n => Math.floor(n);
+    return { exp: '', txt: `${f(diff/86400000)}д ${f((diff%86400000)/3600000)}ч ${f((diff%3600000)/60000)}м ${f((diff%60000)/1000)}с` };
+  };
+
+  // ===== RENDER: COUNTDOWN =====
+  const renderCountdown = () => {
+    const card = document.getElementById('countdownCard');
+    
+    const upcoming = Object.values(EX)
+      .filter(e => getDiff(e.d) > 0)
+      .sort((a,b) => new Date(a.d) - new Date(b.d));
+      
+    if (!upcoming.length) {
+      card.innerHTML = `<div class="countdown-label">Все экзамены</div><div class="countdown-exam">Завершены ✓</div>`;
+      return;
+    }
+    
+    const nextDate = upcoming[0].d;
+    const sameDayExams = upcoming.filter(e => e.d === nextDate);
+    const uniqueNames = [...new Set(sameDayExams.map(e => e.f.split(' (')[0]))];
+    const examTitle = uniqueNames.join(', ');
+    
+    let diff = getDiff(nextDate);
+    const f = n => Math.floor(n);
+    const days = f(diff/86400000);
+    const hrs  = f((diff%86400000)/3600000);
+    const min  = f((diff%3600000)/60000);
+    const sec  = f((diff%60000)/1000);
+    
+    card.innerHTML = `
+      <div class="countdown-label">До следующего экзамена</div>
+      <div class="countdown-exam" style="font-size: 0.95rem; line-height: 1.4;">${examTitle} • ${nextDate.split('-').reverse().join('.')}</div>
+      <div class="countdown-time" style="margin-top: 14px;">
+        <div class="time-block"><span class="time-num">${days}</span><div class="time-lbl">дней</div></div>
+        <div class="time-block"><span class="time-num">${String(hrs).padStart(2,'0')}</span><div class="time-lbl">часов</div></div>
+        <div class="time-block"><span class="time-num">${String(min).padStart(2,'0')}</span><div class="time-lbl">минут</div></div>
+        <div class="time-block"><span class="time-num">${String(sec).padStart(2,'0')}</span><div class="time-lbl">секунд</div></div>
+      </div>`;
+  };
+
+  // ===== RENDER: STATS =====
   const renderStats = () => {
     const container = document.getElementById('statsContainer');
     const counts = {};
     data.forEach(s => {
       const unique = new Set(s.exams.map(e => e.f.split(' (')[0]));
-      unique.forEach(ex => counts[ex] = (counts[ex] || 0) + 1);
+      unique.forEach(ex => counts[ex] = (counts[ex]||0)+1);
     });
-    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
-    const maxVal = 25; 
-    container.innerHTML = sorted.map(([name, count]) => {
-      const percent = (count / maxVal) * 100;
-      return `
+    const sorted = Object.entries(counts).sort((a,b) => b[1]-a[1]);
+    container.innerHTML = sorted.map(([name, count]) => `
       <div class="stat-row">
-        <div class="stat-info"><span class="stat-label">${name}</span><span class="stat-count">${count}</span></div>
-        <div class="stat-bar-bg"><div class="stat-bar-fill" style="width: ${percent}%"></div></div>
-      </div>`;
+        <div class="stat-info">
+          <span class="stat-label">${name}</span>
+          <span class="stat-count">${count}</span>
+        </div>
+        <div class="stat-bar-bg"><div class="stat-bar-fill" style="width:${(count/25)*100}%"></div></div>
+      </div>`).join('');
+  };
+
+  // ===== RENDER: SCHEDULE =====
+  const renderSchedule = () => {
+    const container = document.getElementById('scheduleGrid');
+    const map = {};
+    Object.values(EX).forEach(e => { map[`${e.f}|${e.d}|${e.p}`] = e; });
+    const counts = {};
+    data.forEach(s => s.exams.forEach(e => {
+      const k = `${e.f}|${e.d}|${e.p}`;
+      counts[k] = (counts[k]||0)+1;
+    }));
+    const items = Object.entries(map).sort((a,b) => new Date(a[1].d)-new Date(b[1].d));
+    container.innerHTML = items.map(([key,e]) => {
+      const tmr = getTimer(e.d);
+      return `
+        <div class="schedule-card">
+          <div class="schedule-head">
+            <div class="schedule-name">${e.f}</div>
+            <div class="schedule-date">${e.d.split('-').reverse().join('.')}</div>
+          </div>
+          <div class="schedule-place">📍 ${e.p}</div>
+          <div class="schedule-head">
+            <div class="schedule-count">Сдают: ${counts[key]||0} учеников</div>
+            <div class="timer ${tmr.exp}">${tmr.txt}</div>
+          </div>
+        </div>`;
     }).join('');
   };
+
+  // ===== RENDER: STUDENTS =====
+  const grid = document.getElementById('studentsGrid');
+  const search = document.getElementById('searchInput');
+
   const render = () => {
     const q = search.value.toLowerCase();
-    const opened = Array.from(document.querySelectorAll('details[open]')).map(d => d.dataset.name);
-    grid.innerHTML = data.filter(s => s.fullName.toLowerCase().includes(q)).map(s => `
-      <details class="student-details" data-name="${s.fullName}" ${opened.includes(s.fullName) ? 'open' : ''}>
+    const opened = Array.from(document.querySelectorAll('.student-details[open]')).map(d => d.dataset.name);
+    const pinned = getPinned();
+    const filtered = data.filter(s => s.fullName.toLowerCase().includes(q));
+    filtered.sort((a,b) => {
+      const aP = pinned.includes(a.fullName), bP = pinned.includes(b.fullName);
+      if (aP && !bP) return -1; if (!aP && bP) return 1; return a.id-b.id;
+    });
+    grid.innerHTML = filtered.map(s => {
+      const pin = pinned.includes(s.fullName);
+      return `
+      <details class="student-details ${pin?'pinned':''}" data-name="${s.fullName}" ${opened.includes(s.fullName)?'open':''}>
         <summary class="student-summary">
-          <div class="name-block"><span class="student-num">${String(s.id).padStart(2, '0')}</span><span class="student-name">${s.fullName}</span></div>
-          <div class="expand-icon">▼</div>
+          <div class="name-block">
+            <span class="student-num">${String(s.id).padStart(2,'0')}</span>
+            <span class="student-name">${s.fullName}</span>
+          </div>
+          <div class="summary-controls">
+            <button class="pin-btn ${pin?'active':''}" data-pin="${s.fullName}" title="Закрепить">${pin?'★':'☆'}</button>
+            <div class="expand-icon">▼</div>
+          </div>
         </summary>
         <div class="exam-list">
           ${s.exams.map(e => {
-            let tmr = getTimer(e.d);
+            const tmr = getTimer(e.d);
             return `<div class="exam-item">
-              <div><div class="exam-name">${e.f}</div><div class="exam-date">${e.d.split('-').reverse().join('.')}</div><div class="exam-place">${e.p}</div></div>
+              <div>
+                <div class="exam-name">${e.f}</div>
+                <div class="exam-date">${e.d.split('-').reverse().join('.')}</div>
+                <div class="exam-place">📍 ${e.p}</div>
+              </div>
               <div class="timer ${tmr.exp}">${tmr.txt}</div>
             </div>`;
           }).join('')}
         </div>
-      </details>`).join('');
+      </details>`;
+    }).join('');
   };
+
+  grid.addEventListener('click', e => {
+    const btn = e.target.closest('.pin-btn');
+    if (!btn) return;
+    e.preventDefault(); e.stopPropagation();
+    togglePin(btn.dataset.pin);
+    render();
+  });
   search.addEventListener('input', render);
-  const tgl = document.getElementById('themeToggle');
-  const setTheme = d => {
-    document.body.setAttribute('data-theme', d);
-    tgl.textContent = d === 'dark' ? 'LIGHT' : 'DARK';
-    localStorage.setItem('theme', d);
+
+  // ===== RENDER: THEMES =====
+  const renderThemesView = (currentId) => {
+    const container = document.getElementById('themesGrid');
+    container.innerHTML = THEMES.map(t => `
+      <div class="theme-big-card ${currentId===t.id?'selected':''}" data-theme-id="${t.id}">
+        <div class="theme-big-badge">АКТИВНА</div>
+        <div class="theme-big-preview" style="background:${t.colors[0]}">
+          <div class="theme-big-preview-bar" style="background:${t.colors[1]};border:1px solid ${t.colors[3]}"></div>
+          <div class="theme-big-preview-bar" style="background:${t.colors[2]};opacity:0.7"></div>
+          <div class="theme-big-preview-bar" style="background:${t.colors[3]}"></div>
+        </div>
+        <div class="theme-big-name">${t.emoji} ${t.name}</div>
+        <div class="theme-big-desc">${t.desc}</div>
+      </div>`).join('');
+
+    container.querySelectorAll('.theme-big-card').forEach(card => {
+      card.addEventListener('click', () => {
+        applyTheme(card.dataset.themeId);
+        renderThemesView(card.dataset.themeId);
+      });
+    });
   };
-  tgl.addEventListener('click', () => setTheme(document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
-  setTheme(localStorage.getItem('theme') || 'dark');
-  document.getElementById('year').textContent = new Date().getFullYear();
-  setInterval(render, 1000);
+
+  // ===== MENU =====
+  const menuBtn = document.getElementById('menuBtn');
+  const sideMenu = document.getElementById('sideMenu');
+  const overlay  = document.getElementById('menuOverlay');
+
+  const closeMenu = () => {
+    menuBtn.classList.remove('open');
+    sideMenu.classList.remove('active');
+    overlay.classList.remove('active');
+  };
+  menuBtn.addEventListener('click', () => {
+    menuBtn.classList.toggle('open');
+    sideMenu.classList.toggle('active');
+    overlay.classList.toggle('active');
+  });
+  overlay.addEventListener('click', closeMenu);
+
+  document.querySelectorAll('.menu-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const view = item.dataset.view;
+      document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+      document.getElementById('view-'+view).classList.add('active');
+      closeMenu();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  // ===== INIT =====
+  const savedTheme = getSavedTheme();
+  applyTheme(savedTheme);
+  renderThemesView(savedTheme);
+
   render();
+  renderCountdown();
   renderStats();
+  renderSchedule();
+
+  setInterval(() => {
+    render();
+    renderCountdown();
+    renderSchedule();
+  }, 1000);
 </script>
 </body>
 </html>
