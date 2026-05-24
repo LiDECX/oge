@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
   <style>
-    /* ===== THEMES ===== */
     :root {
       --bg: #0d0d0d;
       --surface: #141414;
@@ -29,8 +28,6 @@
       --accent-gradient: linear-gradient(135deg, #aaaaaa 0%, #666666 100%);
       --radius: 12px;
     }
-
-    /* Dark (default) — уже задан выше */
 
     [data-theme="amoled"] {
       --bg: #000000;
@@ -170,7 +167,6 @@
       font-family: 'JetBrains Mono', monospace;
     }
 
-    /* HEADER */
     .header {
       position: sticky; top: 0; z-index: 9999;
       background: var(--bg);
@@ -202,7 +198,6 @@
     .menu-btn.open span:nth-child(2) { opacity: 0; }
     .menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    /* SIDE MENU */
     .menu-overlay {
       position: fixed; inset: 0;
       background: rgba(0,0,0,0.55);
@@ -266,7 +261,6 @@
     }
     .menu-icon { font-size: 1.1rem; }
 
-    /* THEMES PANEL */
     .themes-panel {
       padding: 8px 16px 16px;
     }
@@ -322,7 +316,6 @@
 
     .container { max-width: 720px; margin: 0 auto; padding: 24px; }
 
-    /* COUNTDOWN */
     .countdown-card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -377,7 +370,6 @@
       text-transform: uppercase; margin-top: 2px;
     }
 
-    /* SEARCH */
     .search-container { margin-bottom: 20px; }
     .search-input {
       width: 100%; padding: 12px 16px;
@@ -392,7 +384,6 @@
       box-shadow: 0 0 0 3px var(--accent-soft);
     }
 
-    /* HERO */
     .badge {
       display: inline-flex; align-items: center; gap: 8px;
       font-size: 0.7rem; color: var(--accent-color);
@@ -413,7 +404,6 @@
       font-family: 'JetBrains Mono', monospace;
     }
 
-    /* STUDENTS */
     .students-grid { display: flex; flex-direction: column; gap: 6px; }
     .student-details {
       background: var(--surface);
@@ -485,7 +475,6 @@
     }
     .timer.expired { color: var(--muted); border-color: var(--border); }
 
-    /* STATS */
     .stats-container {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 12px; padding: 22px;
@@ -503,7 +492,6 @@
     }
     .stat-count { color: var(--bright); font-weight: 600; font-family: 'JetBrains Mono', monospace; }
 
-    /* SCHEDULE */
     .schedule-grid { display: flex; flex-direction: column; gap: 12px; }
     .schedule-card {
       background: var(--surface); border: 1px solid var(--border);
@@ -530,7 +518,6 @@
     .schedule-place { font-size: 0.7rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
     .schedule-count { font-size: 0.7rem; color: var(--accent); font-family: 'JetBrains Mono', monospace; }
 
-    /* THEMES VIEW */
     .themes-view-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -656,7 +643,6 @@
 </div>
 
 <script>
-  // ===== THEMES CONFIG =====
   const THEMES = [
     {
       id: 'dark',
@@ -712,7 +698,6 @@
   const THEME_KEY = 'ogeb9b_theme';
   const PIN_KEY   = 'ogeb9b_pinned';
 
-  // ===== THEME APPLY =====
   const applyTheme = (id) => {
     document.documentElement.setAttribute('data-theme', id === 'dark' ? '' : id);
     localStorage.setItem(THEME_KEY, id);
@@ -729,7 +714,6 @@
     catch(e) { return 'dark'; }
   };
 
-  // ===== EXAM DATA =====
   const P1 = "ГБОУ гимназия №446", P2 = "ГБОУ СОШ №258";
   const EX = {
     M:   { f: "Математика",           d: "2026-06-02", p: P1 },
@@ -779,7 +763,6 @@
     exams: keys.split(',').map(k => EX[k])
   }));
 
-  // ===== HELPERS =====
   const getPinned = () => { try { return JSON.parse(localStorage.getItem(PIN_KEY)) || []; } catch(e) { return []; } };
   const setPinned = arr => localStorage.setItem(PIN_KEY, JSON.stringify(arr));
   const togglePin = name => {
@@ -795,7 +778,6 @@
     return { exp: '', txt: `${f(diff/86400000)}д ${f((diff%86400000)/3600000)}ч ${f((diff%3600000)/60000)}м ${f((diff%60000)/1000)}с` };
   };
 
-  // ===== RENDER: COUNTDOWN =====
   const renderCountdown = () => {
     const card = document.getElementById('countdownCard');
     
@@ -831,7 +813,6 @@
       </div>`;
   };
 
-  // ===== RENDER: STATS =====
   const renderStats = () => {
     const container = document.getElementById('statsContainer');
     const counts = {};
@@ -850,7 +831,6 @@
       </div>`).join('');
   };
 
-  // ===== RENDER: SCHEDULE =====
   const renderSchedule = () => {
     const container = document.getElementById('scheduleGrid');
     const map = {};
@@ -878,7 +858,6 @@
     }).join('');
   };
 
-  // ===== RENDER: STUDENTS =====
   const grid = document.getElementById('studentsGrid');
   const search = document.getElementById('searchInput');
 
@@ -931,7 +910,6 @@
   });
   search.addEventListener('input', render);
 
-  // ===== RENDER: THEMES =====
   const renderThemesView = (currentId) => {
     const container = document.getElementById('themesGrid');
     container.innerHTML = THEMES.map(t => `
@@ -954,7 +932,6 @@
     });
   };
 
-  // ===== MENU =====
   const menuBtn = document.getElementById('menuBtn');
   const sideMenu = document.getElementById('sideMenu');
   const overlay  = document.getElementById('menuOverlay');
@@ -983,7 +960,6 @@
     });
   });
 
-  // ===== INIT =====
   const savedTheme = getSavedTheme();
   applyTheme(savedTheme);
   renderThemesView(savedTheme);
